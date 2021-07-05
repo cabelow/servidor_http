@@ -14,10 +14,15 @@ var controller = function (req, res) {
         res.end("Biografia")
     }
     else if (path == '/portifolio') {
-        let portifolio = []
-        portifolio.push(new Portifolio("perfil", "foto do perfil"))
-        portifolio.push(new Portifolio("fundo", "foto do fundo"))
-        res.end(JSON.stringify(portifolio))
+        if (req.method == 'GET'){    
+            let portifolio = []
+            portifolio.push(new Portifolio("perfil", "foto do perfil"))
+            portifolio.push(new Portifolio("fundo", "foto do fundo"))
+            res.end(JSON.stringify(portifolio))
+        }
+        else if (req.method == 'POST'){
+            res.end('post')
+        }
     }
     else {
         res.end("erro 404")
