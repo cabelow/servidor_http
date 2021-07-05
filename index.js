@@ -1,5 +1,6 @@
 var HTTP = require('http');
 var URL = require('url');
+var QueryString = require('querystring')
 const Portifolio = require('./Portifolio')
 
 var server = HTTP.createServer().listen(3000);
@@ -24,8 +25,11 @@ server.on('request', function (req, res) {
             res.end(JSON.stringify(portifolio))
         }
         else if (req.method == 'POST') {
-            let corpo = req.body
-            console.log(JSON.stringify(corpo))
+            let corpo = ''
+            req.on('data', function(data){
+                corpo += data;
+            })
+            console.log(QueryString.parse(corpo))
             res.end("post")
         }
         else {
